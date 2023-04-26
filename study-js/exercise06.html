@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise 06</title>
+    <script>
+        let numbers = [4, 8, 15, 42, 23, 16];
+        // 2. functional programming: i) HoF (Higher-Order-Function) ii) Pure function -> lambda expression
+        let solution = 0;
+        for (const number of numbers) {
+            if (number % 2 === 0) {
+                const cube = number ** 3;
+                solution += cube;
+            }
+        }
+        console.log(`solution is ${solution}`);
+        solution =
+        numbers.filter( n => n%2 === 0)
+               .map( u => u ** 3)
+               .reduce((s,m) => s+m);
+        console.log(`solution is ${solution}`);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

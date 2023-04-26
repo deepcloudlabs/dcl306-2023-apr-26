@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise 07</title>
+    <script>
+        let numbers = [4, 8, 15, 42, 23, 16];
+        // loop #1
+        for (let i = 0; i < numbers.length; ++i) {
+            const number = numbers[i];
+            console.log(number);
+        }
+        // loop #2
+        for (let i in numbers) {
+            const number = numbers[i];
+            console.log(number);
+        }
+        // loop #3
+        for (const number of numbers) {
+            console.log(number);
+        }
+        // loop #4
+        numbers.forEach( (number,i,array) => console.log(number,i,array) )
+        numbers.forEach( console.log )
+    </script>
+</head>
+<body>
+
+</body>
+</html>

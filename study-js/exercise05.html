@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise 05</title>
+    <script>
+        let numbers = [4, 8, 15, 42, 23, 16];
+        // loop #1
+        for (let i = 0; i < numbers.length; ++i) {
+            const number = numbers[i];
+            console.log(number);
+        }
+        // 2. functional programming: i) HoF (Higher-Order-Function) ii) Pure function -> lambda expression
+        let state = 42;
+        let numericOrderDesc = function (x, y) { // it is not a pure function anymore right after we touch state!
+            if (x < y) return +1;
+            if (y < x) return -1;
+            state++;
+            return 0;
+        };
+        /*
+        let numericOrderAsc = function(x, y){ // pure function
+            if (x<y) return -1;
+            if (y<x) return +1;
+            return 0;
+        };
+        let numericOrderAsc = function(x, y){ // pure function
+            return x-y;
+        }
+        let numericOrderAsc = (x, y) => { // pure function: lambda expression, arrow function
+            return x-y;
+        }
+        */
+        let numericOrderAsc = (x, y) => x-y; // pure function: lambda expression, arrow function
+        numbers.sort((x, y) => y-x);
+        console.log(numbers);
+        numbers.sort((x, y) => x-y);
+        console.log(numbers);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

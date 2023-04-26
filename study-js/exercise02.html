@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise 02</title>
+    <script>
+        // 1. Object-based
+        let jack = {
+            fullname: "jack bauer",
+            identity: "11111111110",
+            iban: "tr1",
+            salary: 100_000,
+            sayHello: function(){
+                console.log(`Hello, ${this.fullname}!`);
+            },
+            department: {
+                name: "IT",
+                director: {
+                    identitiy: "2",
+                    fullname: "ben linus"
+                }
+            }
+        };
+        jack.sayHello();
+        let kate = JSON.parse(JSON.stringify(jack)); // deep cloning -> serializing fields/attributes
+        kate.fullname = "kate austen";
+        jack.sayHello();
+        kate.sayHello();
+        kate.department = {...jack.department}
+        kate.department.name = "SALES";
+        kate.department.director.fullname = "jin kwon";
+    </script>
+</head>
+<body>
+
+</body>
+</html>

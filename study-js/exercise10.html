@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise 10</title>
+    <script>
+        class Employee {
+            #identity;
+            #fullname;
+            #iban;
+            #salary;
+            constructor(identity, fullname, iban, salary) {
+                this.#identity = identity;
+                this.#fullname = fullname;
+                this.#iban = iban;
+                this.#salary = salary;
+                // this.sayHello = this.sayHello.bind(this);
+            }
+            get identity(){
+                return this.#identity;
+            }
+            get fullname(){
+                return this.#fullname;
+            }
+            set fullname(newFullname){
+                if (newFullname && newFullname.length > 3)
+                this.#fullname = newFullname;
+            }
+            /*
+                        sayHello(){
+                            console.log(`Hello, ${this.fullname}!`);
+                        }
+            */
+            sayHello = () => {
+                console.log(`Hello, ${this.#fullname}!`);
+            }
+
+        }
+
+        const jack = new Employee("1", "jack shephard", "tr1", 100_000);
+        jack.sayHello(); // sayHello(jack)
+        window.setInterval(jack.sayHello, 3_000)
+    </script>
+</head>
+<body>
+
+</body>
+</html>

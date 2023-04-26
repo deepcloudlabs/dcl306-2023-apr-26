@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exercise 03</title>
+    <script>
+        // 1. Object-based
+        let jack = {
+            fullname: "jack bauer",
+            identity: "11111111110",
+            iban: "tr1",
+            salary: 100_000,
+            sayHello: function(){
+                console.log(`Hello, ${this.fullname}!`);
+            },
+            department: {
+                name: "IT",
+                director: {
+                    identitiy: "2",
+                    fullname: "ben linus"
+                }
+            }
+        };
+        /*
+       let iban = jack.iban;
+       let salary = jack.salary;
+       let identity = jack.identity;
+       let fullname = jack.fullname;
+       */
+        let {iban, salary, identity, fullname,...rest} = jack;
+    </script>
+</head>
+<body>
+
+</body>
+</html>
