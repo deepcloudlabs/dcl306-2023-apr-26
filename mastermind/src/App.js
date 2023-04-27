@@ -14,6 +14,8 @@
 // 1234 -> -2
 // 60 sec. + max move 10, lives: 3
 import {PureComponent} from "react";
+import Move from "./model/Move";
+import initializeGame from "./utility/mastermind-utility";
 
 class App extends PureComponent { // Stateful Component
     constructor(props, context) {
@@ -53,7 +55,31 @@ class App extends PureComponent { // Stateful Component
 
         }, 1_000);
     }
-
+    play = () => {
+         let game = {...this.state.game};
+         let constraint = {...this.state.constraint};
+         game.numberOfMoves++;
+         if (game.secret === game.guess){
+             game.level++;
+             if (game.level>10){
+                 // TODO: player wins
+             } else {
+                initializeGame(game);
+             }
+         } else {
+             if (game.numberOfMoves >constraint.maxNumberOfMoves){
+                 game.lives--;
+                 if (game.lives <= 0){
+                     // TODO: player loses
+                 } else {
+                    initializeGame(game);
+                 }
+             } else {
+                 game.moves = [...game.moves,new Move(game)];
+             }
+         }
+         this.setState({game});
+    }
     handleInputChange = (event) => {
         let guess = event.target.value;
         let game = {...this.state.game};
@@ -122,7 +148,36 @@ class App extends PureComponent { // Stateful Component
                                        onChange={this.handleInputChange}
                                        value={this.state.game.guess}/>
                                 <label htmlFor="guess">Guess</label>
+                                <button className="btn btn-success"
+                                        onClick={this.play}>Play</button>
                             </div>
+                        </div>
+                        <div className="mb-3">
+                            <table className="table table-bordered table-hover table-striped table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Guess</th>
+                                        <th>Partial Match</th>
+                                        <th>Perfect Match</th>
+                                        <th>Message</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {
+                                    this.state.game.moves.map(
+                                        (move,index) =>
+                                        <tr key={move.guess}>
+                                            <td>{index+1}</td>
+                                            <td>{move.guess}</td>
+                                            <td>{move.partial}</td>
+                                            <td>{move.perfect}</td>
+                                            <td>{move.message}</td>
+                                        </tr>
+                                    )
+                                }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
