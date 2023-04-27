@@ -2,7 +2,7 @@ function createDigit(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function createSecret(numberOfDigits) {
+export function createSecret(numberOfDigits) {
     const digits = [];
 
     digits.push(createDigit(1, 9));
@@ -11,7 +11,9 @@ function createSecret(numberOfDigits) {
         if (digits.includes(digit)) continue;
         digits.push(digit);
     }
-    return digits.reduce((secret, digit) => 10 * secret + digit);
+    let secretNumber = digits.reduce((secret, digit) => 10 * secret + digit);
+    console.log(secretNumber);
+    return secretNumber;
 }
 
 export default function initializeGame(game) {
