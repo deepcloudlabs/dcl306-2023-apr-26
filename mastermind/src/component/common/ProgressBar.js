@@ -4,7 +4,7 @@ export default function ProgressBar({value,pbColor, pbWidth}){
     return (
         <div className="progress">
             <div className={pbColor}
-                 style={{width: pbWidth}}>*** {value} ***</div>
+                 style={{width: pbWidth}}>{value}</div>
         </div>
     );
 }
