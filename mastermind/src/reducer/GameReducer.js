@@ -2,7 +2,7 @@
 import initializeGame from "../utility/mastermind-utility";
 import Move from "../model/Move";
 
-export default function gameReducer(game, action) {
+export default function GameReducer(game, action) {
     const newGame = {...game};
     switch (action.type) {
         case "PLAY":
@@ -10,7 +10,7 @@ export default function gameReducer(game, action) {
             if (newGame.secret === newGame.guess) {
                 newGame.level++;
                 if (newGame.level > 10) {
-                    //TODO
+                    newGame.playerWins = true;
                 } else {
                     initializeGame(newGame);
                 }
@@ -18,7 +18,7 @@ export default function gameReducer(game, action) {
                 if (newGame.numberOfMoves > 10) {
                     newGame.lives--;
                     if (newGame.lives <= 0) {
-                        //TODO
+                        newGame.playerLoses = true;
                     } else {
                         initializeGame(newGame);
                     }

@@ -18,16 +18,27 @@ import ProgressBar from "./component/common/ProgressBar";
 import DisabledInput from "./component/common/DisabledInput";
 import Container from "./component/common/Container";
 import {ConstraintContext, GameContext} from "./MastermindProvider";
+import {useNavigate} from "react-router";
 
-function MastermindHook() { // Stateful Component
+function MastermindStateless() { // Stateful Component
 
     const {game, dispatchGame} = useContext(GameContext);
     const {constraint, dispatchConstraint} = useContext(ConstraintContext);
-
     useEffect(() => {
         const timer = setInterval(() => dispatchConstraint({type: "COUNT_DOWN"}), 1_000);
         return () => clearInterval(timer)
     });
+        const navigate = useNavigate();
+    useEffect(()=>{
+        if (game.playerWins){
+            navigate("/wins");
+            return;
+        }
+        else if (game.playerLoses){
+            navigate("/loses");
+            return;
+        }
+    }, [game.playerWins, game.playerLoses,navigate])
 
     return ( // View
         <Container>
@@ -106,4 +117,4 @@ function MastermindHook() { // Stateful Component
     );
 }
 
-export default MastermindHook;
+export default MastermindStateless;

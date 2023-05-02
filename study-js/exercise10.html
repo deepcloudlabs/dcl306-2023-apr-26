@@ -39,6 +39,8 @@
 
         const jack = new Employee("1", "jack shephard", "tr1", 100_000);
         jack.sayHello(); // sayHello(jack)
+        jack.fullname = "abcd";
+        jack.#identity === "1";
         window.setInterval(jack.sayHello, 3_000)
     </script>
 </head>
