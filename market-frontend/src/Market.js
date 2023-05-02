@@ -12,7 +12,7 @@ import {CategoryScale, Chart as ChartJS, Tooltip, Legend, LinearScale, LineEleme
 
 const socket = io("ws://localhost:5555");
 const options = {
-    responsive: true,
+    responsive: false,
     animation: false,
     maintainAspectRatio: false,
     plugins: {
@@ -100,21 +100,17 @@ function Market() {
                 newTrades = newTrades.slice(newTrades.length-windowSize);
             }
             setTrades(newTrades);
-            setChartData(chartData => {
-                let newChardData = {...chartData};
-                newChardData.datasets = [...chartData.datasets];
-                newChardData.datasets[0].data = [...chartData.datasets[0].data, trade.price];
-                newChardData.labels = [...chartData.labels, trade.timestamp];
-                if (newChardData.labels.length > windowSize) {
-                    const start = newChardData.labels.length - windowSize;
-                    newChardData.labels = newChardData.labels.slice(start);
-                }
-                if (newChardData.datasets[0].data.length > windowSize) {
-                    const start = newChardData.datasets[0].data.length - windowSize;
-                    newChardData.datasets[0].data = newChardData.datasets[0].data.slice(start);
-                }
-                return newChardData;
-            })
+            const newChartData = {...chartData};
+            newChartData.datasets = [...chartData.datasets];
+            newChartData.datasets[0].data = [...chartData.datasets[0].data, Number(trade.price)]
+            if (newChartData.datasets[0].data.length > windowSize){
+                newChartData.datasets[0].data.splice(0,newChartData.datasets[0].data.length - windowSize);
+            }
+            newChartData.labels = [...chartData.labels, trade.timestamp];
+            if (newChartData.labels.length > windowSize){
+                newChartData.labels.splice(0,newChartData.labels.length - windowSize);
+            }
+            setChartData(newChartData);
         })
     })
     let connectionButton = <Button action={disconnect}
